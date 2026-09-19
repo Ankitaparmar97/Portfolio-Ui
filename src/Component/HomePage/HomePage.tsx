@@ -1,15 +1,11 @@
 import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { useBranding } from '../../branding'
 import AboutPage from '../AboutPage/AboutPage'
 import BusinessPitchPage from '../BussinessPage/BussinessPage'
 import ContactPage from '../ContactPage/ContactPage'
-import PixelBlast from '../PixelBlast/PixelBlast'
 
 function HomePage() {
   const heroRef = useRef<HTMLElement>(null)
-  const { mode, theme } = useBranding()
-  const pixelBlastColor = mode === 'dark' ? theme.palette.accent.lime : theme.palette.accent.blue
 
   useEffect(() => {
     const hero = heroRef.current
@@ -31,33 +27,6 @@ function HomePage() {
 
   return (
     <main className="home-page">
-      <div className="home-pixel-blast-layer" aria-hidden="true">
-        <PixelBlast
-          className="home-pixel-blast"
-          variant="circle"
-          pixelSize={8}
-          color={pixelBlastColor}
-          patternScale={3}
-          patternDensity={2.5}
-          minimumPatternDensity={0.85}
-          scrollDensity
-          pixelSizeJitter={0.5}
-          enableRipples
-          rippleSpeed={0.4}
-          rippleThickness={0.12}
-          rippleIntensityScale={1.5}
-          liquid
-          liquidStrength={0.12}
-          liquidRadius={1.2}
-          liquidWobbleSpeed={5}
-          speed={1}
-          edgeFade={0}
-          cursorRadius={150}
-          autoPauseOffscreen={false}
-          transparent
-        />
-      </div>
-
       <section
         className="home-hero"
         id="home"

@@ -2,6 +2,7 @@ import { useInView, useReducedMotion } from 'motion/react'
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { CONTACT_LINKS } from '../Constant/Constant'
 import ProcessAnimation from './ProcessAnimation'
+import ProcessCards from './ProcessCards'
 
 const pitchTitleLines = ['Big ideas.', 'Clear', 'next steps.']
 const scrambleCharacters = {
@@ -45,7 +46,7 @@ const pitchSteps = [
   ['02', 'Define', 'A practical direction, scope, timeline, and success measures with no fuzzy edges.'],
   ['03', 'Create', 'Design and development move together through clear, reviewable milestones.'],
   ['04', 'Grow', 'We launch, learn, improve, and support the system as your business evolves.'],
-]
+] as const
 
 type BusinessPitchPageProps = {
   embedded?: boolean
@@ -139,15 +140,7 @@ function BusinessPitchPage({ embedded = false }: BusinessPitchPageProps) {
         <ProcessAnimation />
       </div>
 
-      <section className="pitch-process" aria-label="Our process">
-        {pitchSteps.map(([number, title, description]) => (
-          <article key={number}>
-            <span>{number}</span>
-            <h2>{title}</h2>
-            <p>{description}</p>
-          </article>
-        ))}
-      </section>
+      <ProcessCards steps={pitchSteps} />
 
       <section className="pitch-note">
         <p>Small team energy.</p>

@@ -38,6 +38,26 @@ function Navbarpage() {
     return () => window.clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    const desktopQuery = window.matchMedia('(min-width: 821px)')
+    const closeOnDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setIsMenuOpen(false)
+    }
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMenuOpen(false)
+    }
+
+    document.body.classList.toggle('studio-menu-open', isMenuOpen)
+    window.addEventListener('keydown', closeOnEscape)
+    desktopQuery.addEventListener('change', closeOnDesktop)
+
+    return () => {
+      document.body.classList.remove('studio-menu-open')
+      window.removeEventListener('keydown', closeOnEscape)
+      desktopQuery.removeEventListener('change', closeOnDesktop)
+    }
+  }, [isMenuOpen])
+
   const displayTime = new Intl.DateTimeFormat('en-GB', {
     hour: '2-digit',
     minute: '2-digit',

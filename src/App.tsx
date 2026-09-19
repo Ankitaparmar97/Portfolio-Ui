@@ -1,10 +1,15 @@
+import { lazy, Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import BusinessServices from './Component/BusinessServices/BusinessServices'
-import HomePage from './Component/HomePage/HomePage'
-import Navbarpage from './Component/Navbarpage/Navbarpage'
 import ScrollRuler from './Component/ScrollRuler/ScrollRuler'
+import BusinessServicesSkeleton from './Component/Skeleton/BusinessServicesSkeleton'
+import HomePageSkeleton from './Component/Skeleton/HomePageSkeleton'
+import NavbarSkeleton from './Component/Skeleton/NavbarSkeleton'
 import StudioCursor from './Component/StudioCursor/StudioCursor'
 import SeoHead from './seo/SeoHead'
+
+const BusinessServices = lazy(() => import('./Component/BusinessServices/BusinessServices'))
+const HomePage = lazy(() => import('./Component/HomePage/HomePage'))
+const Navbarpage = lazy(() => import('./Component/Navbarpage/Navbarpage'))
 
 function App() {
   return (
@@ -12,10 +17,26 @@ function App() {
       <SeoHead />
       <StudioCursor />
       <ScrollRuler />
-      <Navbarpage />
+      <Suspense fallback={<NavbarSkeleton />}>
+        <Navbarpage />
+      </Suspense>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/work" element={<BusinessServices />} />
+        <Route
+          path="/"
+          element={(
+            <Suspense fallback={<HomePageSkeleton />}>
+              <HomePage />
+            </Suspense>
+          )}
+        />
+        <Route
+          path="/work"
+          element={(
+            <Suspense fallback={<BusinessServicesSkeleton />}>
+              <BusinessServices />
+            </Suspense>
+          )}
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

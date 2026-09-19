@@ -35,6 +35,9 @@ export type BrandingMode = 'light' | 'dark'
 
 export const BRANDING_THEME_STORAGE_KEY = 'pixel-avenue-theme'
 
+const bodyFontFamily = '"Bricolage Grotesque", "Trebuchet MS", sans-serif'
+const headingFontFamily = '"Geist Pixel Circle", "Bricolage Grotesque", sans-serif'
+
 export function getDesignTokens(mode: BrandingMode): ThemeOptions {
   const isDark = mode === 'dark'
 
@@ -67,13 +70,13 @@ export function getDesignTokens(mode: BrandingMode): ThemeOptions {
       borderRadius: 4,
     },
     typography: {
-      fontFamily: '"Bricolage Grotesque", "Trebuchet MS", sans-serif',
-      h1: { fontFamily: '"Bricolage Grotesque", "Trebuchet MS", sans-serif' },
-      h2: { fontFamily: '"Bricolage Grotesque", "Trebuchet MS", sans-serif' },
-      h3: { fontFamily: '"Bricolage Grotesque", "Trebuchet MS", sans-serif' },
-      h4: { fontFamily: '"Bricolage Grotesque", "Trebuchet MS", sans-serif' },
-      h5: { fontFamily: '"Bricolage Grotesque", "Trebuchet MS", sans-serif' },
-      h6: { fontFamily: '"Bricolage Grotesque", "Trebuchet MS", sans-serif' },
+      fontFamily: bodyFontFamily,
+      h1: { fontFamily: headingFontFamily },
+      h2: { fontFamily: headingFontFamily },
+      h3: { fontFamily: headingFontFamily },
+      h4: { fontFamily: headingFontFamily },
+      h5: { fontFamily: headingFontFamily },
+      h6: { fontFamily: headingFontFamily },
       button: {
         fontFamily: 'inherit',
         textTransform: 'none',

@@ -13,6 +13,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.11",
+    "geist": "^1.7.2",
     "motion": "^12.43.0",
     "postprocessing": "^6.39.4",
     "react": "^19.2.7",
