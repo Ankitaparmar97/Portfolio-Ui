@@ -6,6 +6,7 @@ import {
   useTransform,
   type MotionValue,
 } from 'motion/react'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import { useRef, useState } from 'react'
 
 type ProcessStep = readonly [number: string, title: string, description: string]
@@ -14,6 +15,7 @@ type ProcessCardProps = {
   index: number
   progress: MotionValue<number>
   reduceMotion: boolean | null
+  isMobile: boolean
   step: ProcessStep
 }
 
@@ -21,13 +23,16 @@ const stackOffsets = [-30, -10, 12, 32]
 const stackRotations = [-5, 3.4, -2.2, 4.6]
 const stackScales = [1, 0.975, 0.95, 0.925]
 
-function ProcessCard({ index, progress, reduceMotion, step }: ProcessCardProps) {
+function ProcessCard({ index, progress, reduceMotion, isMobile, step }: ProcessCardProps) {
   const [number, title, description] = step
   const expandedTop = `${12.5 + index * 25}%`
   const top = useTransform(progress, [0, 0.24, 0.78, 1], ['50%', '50%', expandedTop, expandedTop])
-  const left = useTransform(progress, [0, 0.24, 0.78, 1], ['53%', '53%', '0%', '0%'])
-  const width = useTransform(progress, [0, 0.24, 0.78, 1], ['47%', '47%', '100%', '100%'])
-  const x = useTransform(progress, [0, 0.24, 0.78, 1], [stackOffsets[index], stackOffsets[index], 0, 0])
+  const desktopLeft = useTransform(progress, [0, 0.24, 0.78, 1], ['53%', '53%', '0%', '0%'])
+  const mobileLeft = useTransform(progress, [0, 0.24, 0.78, 1], ['7%', '7%', '0%', '0%'])
+  const desktopWidth = useTransform(progress, [0, 0.24, 0.78, 1], ['47%', '47%', '100%', '100%'])
+  const mobileWidth = useTransform(progress, [0, 0.24, 0.78, 1], ['86%', '86%', '100%', '100%'])
+  const desktopX = useTransform(progress, [0, 0.24, 0.78, 1], [stackOffsets[index], stackOffsets[index], 0, 0])
+  const mobileX = useTransform(progress, [0, 0.24, 0.78, 1], [stackOffsets[index] * 0.55, stackOffsets[index] * 0.55, 0, 0])
   const rotate = useTransform(
     progress,
     [0, 0.24, 0.78, 1],
@@ -43,7 +48,17 @@ function ProcessCard({ index, progress, reduceMotion, step }: ProcessCardProps) 
   return (
     <motion.article
       className={`pitch-process-card pitch-process-card-${index + 1}`}
-      style={reduceMotion ? { top: expandedTop } : { top, left, width, x, rotate, scale, zIndex: 4 - index }}
+      style={reduceMotion
+        ? { top: expandedTop }
+        : {
+            top,
+            left: isMobile ? mobileLeft : desktopLeft,
+            width: isMobile ? mobileWidth : desktopWidth,
+            x: isMobile ? mobileX : desktopX,
+            rotate,
+            scale,
+            zIndex: 4 - index,
+          }}
     >
       <div className="pitch-process-card-rail" aria-hidden="true">
         <span>Pixel Avenue</span><i>↗</i><span>Process {number}</span><i>↗</i><span>Pixel Avenue</span>
@@ -65,6 +80,7 @@ type ProcessCardsProps = {
 function ProcessCards({ steps }: ProcessCardsProps) {
   const stageRef = useRef<HTMLElement>(null)
   const reduceMotion = useReducedMotion()
+  const isMobile = useMediaQuery('(max-width: 820px)')
   const [showIntro, setShowIntro] = useState(true)
   const { scrollYProgress } = useScroll({
     target: stageRef,
@@ -76,7 +92,7 @@ function ProcessCards({ steps }: ProcessCardsProps) {
   })
 
   return (
-    <section ref={stageRef} className="pitch-process" id="process-cards" aria-label="Our process">
+    <section ref={stageRef} className={`pitch-process${reduceMotion ? ' is-reduced-motion' : ''}`} id="process-cards" aria-label="Our process">
       <div className="pitch-process-sticky">
         <div className="pitch-process-heading" aria-hidden="true">
           <span>Our process</span>
@@ -98,6 +114,7 @@ function ProcessCards({ steps }: ProcessCardsProps) {
               key={step[0]}
               progress={scrollYProgress}
               reduceMotion={reduceMotion}
+              isMobile={isMobile}
               step={step}
             />
           ))}

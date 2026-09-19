@@ -2709,20 +2709,15 @@ img {
   }
 
   .pitch-process {
-    grid-template-columns: 1fr;
-  }
-
-  .pitch-process {
     width: calc(100% + 40px);
-    height: auto;
+    height: 210svh;
     margin-inline: -20px;
   }
 
   .pitch-process-sticky {
-    position: relative;
-    height: auto;
+    position: sticky;
+    height: 100svh;
     min-height: 0;
-    padding: 104px 20px 34px;
   }
 
   .pitch-process-heading {
@@ -2732,35 +2727,27 @@ img {
   }
 
   .pitch-process-deck {
-    position: relative;
-    inset: auto;
-    display: grid;
-    gap: 10px;
+    inset: 100px 20px 26px;
   }
 
   .pitch-process-card {
-    position: relative;
-    top: auto !important;
-    left: auto !important;
-    width: 100% !important;
-    height: auto;
-    min-height: 184px;
-    rotate: none !important;
-    scale: none !important;
-    translate: none;
-    transform: none !important;
+    height: 24%;
+    min-height: 0;
   }
 
   .pitch-process-intro {
-    display: none;
+    top: 24%;
+    width: calc(100% - 40px);
+    font-size: clamp(40px, 10.5vw, 80px);
+    translate: none;
   }
 
   .pitch-process-card-body {
-    min-height: 160px;
+    height: calc(100% - 22px);
     grid-template-columns: 52px 1fr 42px;
     grid-template-rows: auto auto;
     gap: 8px 14px;
-    padding: 18px 16px;
+    padding: 10px 16px;
   }
 
   .pitch-process-card-number {
@@ -2783,6 +2770,39 @@ img {
     grid-column: 3;
     grid-row: 1;
     font-size: 42px;
+  }
+
+  .pitch-process.is-reduced-motion {
+    height: auto;
+  }
+
+  .pitch-process.is-reduced-motion .pitch-process-sticky {
+    position: relative;
+    height: auto;
+    padding: 104px 20px 34px;
+  }
+
+  .pitch-process.is-reduced-motion .pitch-process-deck {
+    position: relative;
+    inset: auto;
+    display: grid;
+    gap: 10px;
+  }
+
+  .pitch-process.is-reduced-motion .pitch-process-card {
+    position: relative;
+    top: auto !important;
+    height: auto;
+    min-height: 184px;
+    translate: none;
+  }
+
+  .pitch-process.is-reduced-motion .pitch-process-card-body {
+    min-height: 160px;
+  }
+
+  .pitch-process.is-reduced-motion .pitch-process-intro {
+    display: none;
   }
 
 }
@@ -4184,7 +4204,7 @@ div {
   }
 
   .pitch-process-sticky {
-    padding: 96px 16px 28px;
+    padding: 0;
   }
 
   .pitch-process-heading {
@@ -4194,14 +4214,13 @@ div {
   }
 
   .pitch-process-card {
-    min-height: 174px;
+    height: 24%;
   }
 
   .pitch-process-card-body {
-    min-height: 150px;
     grid-template-columns: 34px minmax(0, 1fr) 30px;
     gap: 10px;
-    padding: 14px 12px;
+    padding: 8px 12px;
   }
 
   .pitch-process-card-number {
@@ -4219,6 +4238,27 @@ div {
 
   .pitch-process-card-arrow {
     font-size: 30px;
+  }
+
+  .pitch-process-deck {
+    inset: 96px 16px 28px;
+  }
+
+  .pitch-process-intro {
+    left: 16px;
+    width: calc(100% - 32px);
+  }
+
+  .pitch-process.is-reduced-motion .pitch-process-sticky {
+    padding: 96px 16px 28px;
+  }
+
+  .pitch-process.is-reduced-motion .pitch-process-card {
+    min-height: 174px;
+  }
+
+  .pitch-process.is-reduced-motion .pitch-process-card-body {
+    min-height: 150px;
   }
 
   .pitch-note {
