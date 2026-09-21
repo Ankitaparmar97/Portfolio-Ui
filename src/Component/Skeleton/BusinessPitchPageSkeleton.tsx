@@ -1,5 +1,4 @@
 import SkeletonBlock from './SkeletonBlock'
-import ProcessAnimationSkeleton from './ProcessAnimationSkeleton'
 import ProcessCardsSkeleton from './ProcessCardsSkeleton'
 
 function BusinessPitchPageSkeleton() {
@@ -17,7 +16,6 @@ function BusinessPitchPageSkeleton() {
           </div>
           <SkeletonBlock className="skeleton-pill" />
         </div>
-        <ProcessAnimationSkeleton />
       </div>
       <ProcessCardsSkeleton />
     </section>

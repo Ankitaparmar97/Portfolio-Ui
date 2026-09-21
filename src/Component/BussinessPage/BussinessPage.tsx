@@ -1,8 +1,8 @@
 import { useInView, useReducedMotion } from 'motion/react'
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CONTACT_LINKS } from '../Constant/Constant'
-import ProcessAnimation from './ProcessAnimation'
 import ProcessCards from './ProcessCards'
+import ProjectShowcase from './ProjectShowcase'
 
 const pitchTitleLines = ['Big ideas.', 'Clear', 'next steps.']
 const scrambleCharacters = {
@@ -10,12 +10,7 @@ const scrambleCharacters = {
   lowercase: 'abcdefghijklmnopqrstuvwxyz',
   symbols: '0123456789<>/?#$%&',
 }
-const titleCharacterCounts = pitchTitleLines.map((line) => line.replace(/\s/g, '').length)
-const titleCharacterTotal = titleCharacterCounts.reduce((total, count) => total + count, 0)
-
-type PitchTitleLineStyle = CSSProperties & {
-  '--resolved-progress': string
-}
+const titleCharacterTotal = pitchTitleLines.join('').replace(/\s/g, '').length
 
 function getScrambleCharacter(character: string) {
   const characterPool = /[A-Z]/.test(character)
@@ -58,7 +53,6 @@ function BusinessPitchPage({ embedded = false }: BusinessPitchPageProps) {
   const reduceMotion = useReducedMotion()
   const [titleFrame, setTitleFrame] = useState({
     lines: pitchTitleLines,
-    resolvedCharacters: titleCharacterTotal,
     isScrambling: false,
   })
   const Root = embedded ? 'section' : 'main'
@@ -84,7 +78,6 @@ function BusinessPitchPage({ embedded = false }: BusinessPitchPageProps) {
         lastFrameTime = currentTime
         setTitleFrame({
           lines: revealProgress === 1 ? pitchTitleLines : getScrambledTitle(resolvedCharacters),
-          resolvedCharacters: revealProgress === 1 ? titleCharacterTotal : resolvedCharacters,
           isScrambling: revealProgress < 1,
         })
       }
@@ -107,27 +100,15 @@ function BusinessPitchPage({ embedded = false }: BusinessPitchPageProps) {
         <section className="pitch-hero">
           <p className="studio-label">How we work · 04 steps</p>
           <h1 ref={titleRef} aria-label={pitchTitleLines.join(' ')}>
-            {titleFrame.lines.map((line, lineIndex) => {
-              const charactersBeforeLine = titleCharacterCounts
-                .slice(0, lineIndex)
-                .reduce((total, count) => total + count, 0)
-              const resolvedInLine = Math.min(
-                titleCharacterCounts[lineIndex],
-                Math.max(0, titleFrame.resolvedCharacters - charactersBeforeLine),
-              )
-              const resolvedProgress = (resolvedInLine / titleCharacterCounts[lineIndex]) * 100
-
-              return (
-                <span
-                  className={`pitch-title-line ${titleFrame.isScrambling ? 'is-scrambling' : ''}`}
-                  style={{ '--resolved-progress': `${resolvedProgress}%` } as PitchTitleLineStyle}
-                  aria-hidden="true"
-                  key={pitchTitleLines[lineIndex]}
-                >
-                  {line}
-                </span>
-              )
-            })}
+            {titleFrame.lines.map((line, lineIndex) => (
+              <span
+                className={`pitch-title-line ${titleFrame.isScrambling ? 'is-scrambling' : ''}`}
+                aria-hidden="true"
+                key={pitchTitleLines[lineIndex]}
+              >
+                {line}
+              </span>
+            ))}
           </h1>
           <p>
             Pixel Avenue brings strategy, design, and technology into one practical process—so your next digital move
@@ -137,9 +118,9 @@ function BusinessPitchPage({ embedded = false }: BusinessPitchPageProps) {
             Start a conversation <span aria-hidden="true">↗</span>
           </a>
         </section>
-        <ProcessAnimation />
       </div>
 
+      <ProjectShowcase />
       <ProcessCards steps={pitchSteps} />
 
       <section className="pitch-note">

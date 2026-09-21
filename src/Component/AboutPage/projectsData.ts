@@ -6,6 +6,7 @@ export type Project = {
   title: string
   description: string
   services: readonly string[]
+  featured?: boolean
   href?: string
   linkLabel?: string
 }
@@ -20,6 +21,19 @@ export function getProjectId(title: string) {
 
 export const PROJECTS: readonly Project[] = [
   {
+    date: 'September 2025',
+    dateCreated: '2025-09',
+    shortDate: 'SEP 2025',
+    eyebrow: 'Business website',
+    title: 'Darshan Enterprises',
+    description:
+      'We created a product-led website for an industrial electrical supplier, helping customers explore trusted brands and connect with the sales team.',
+    services: ['Website Design', 'Website Development', 'SEO Optimization'],
+    featured: true,
+    href: 'https://www.darshanent.co.in/',
+    linkLabel: 'Visit Darshan Enterprises',
+  },
+  {
     date: 'March 2025',
     dateCreated: '2025-03',
     shortDate: 'MAR 2025',
@@ -30,18 +44,6 @@ export const PROJECTS: readonly Project[] = [
     services: ['Website Design', 'Website Development', 'UI/UX Design'],
     href: 'https://bhavnagardental.netlify.app/',
     linkLabel: 'Visit the clinic website',
-  },
-  {
-    date: 'September 2025',
-    dateCreated: '2025-09',
-    shortDate: 'SEP 2025',
-    eyebrow: 'Business website',
-    title: 'Darshan Enterprises',
-    description:
-      'We created a product-led website for an industrial electrical supplier, helping customers explore trusted brands and connect with the sales team.',
-    services: ['Website Design', 'Website Development', 'SEO Optimization'],
-    href: 'https://www.darshanent.co.in/',
-    linkLabel: 'Visit Darshan Enterprises',
   },
   {
     date: 'March 2026',

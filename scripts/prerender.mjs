@@ -10,16 +10,6 @@ const siteName = 'Pixel Avenue'
 const contactEmail = 'pixelavenuein@gmail.com'
 const projects = [
   {
-    title: 'Bhavnagar Dental Clinic',
-    description:
-      'A welcoming clinic website that makes treatments, doctor information, and patient contact details easy to find.',
-    dateCreated: '2025-03',
-    genre: 'Healthcare website',
-    services: ['Website Design', 'Website Development', 'UI/UX Design'],
-    fragment: 'project-bhavnagar-dental-clinic',
-    sameAs: 'https://bhavnagardental.netlify.app/',
-  },
-  {
     title: 'Darshan Enterprises',
     description:
       'A product-led website for an industrial electrical supplier that helps customers explore brands and contact sales.',
@@ -28,6 +18,16 @@ const projects = [
     services: ['Website Design', 'Website Development', 'SEO Optimization'],
     fragment: 'project-darshan-enterprises',
     sameAs: 'https://www.darshanent.co.in/',
+  },
+  {
+    title: 'Bhavnagar Dental Clinic',
+    description:
+      'A welcoming clinic website that makes treatments, doctor information, and patient contact details easy to find.',
+    dateCreated: '2025-03',
+    genre: 'Healthcare website',
+    services: ['Website Design', 'Website Development', 'UI/UX Design'],
+    fragment: 'project-bhavnagar-dental-clinic',
+    sameAs: 'https://bhavnagardental.netlify.app/',
   },
   {
     title: 'A smarter way to manage the business',

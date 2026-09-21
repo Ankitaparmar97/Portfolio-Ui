@@ -66,16 +66,14 @@ function AboutPage({ embedded = false }: AboutPageProps) {
       id={embedded ? 'about' : undefined}
       ref={sectionRef}
       data-scroll-scene={embedded ? 'about' : undefined}
-      data-scene-label={embedded ? 'Our project journey' : undefined}
+      data-scene-label={embedded ? 'Selected work' : undefined}
       aria-labelledby="selected-work-title"
     >
       <div className="about-timeline-sticky">
-        <div className="about-timeline-glow" aria-hidden="true" />
-
         <div
           className="about-timeline-wheel"
           style={{ transform: `translateY(-50%) rotate(${timelinePosition * -42}deg)` }}
-          aria-label="Project timeline"
+          aria-label="Project selector"
         >
           {PROJECTS.map((project, index) => (
             <div
@@ -105,18 +103,19 @@ function AboutPage({ embedded = false }: AboutPageProps) {
         </div>
 
         <p className="about-scroll-note" aria-hidden="true">
-          Scroll through our journey <span>↓</span>
+          Scroll through our work <span>↓</span>
         </p>
       </div>
 
-      <section className="about-project-list" aria-label="Our project journey">
+      <section className="about-project-list" aria-label="Selected projects">
         {PROJECTS.map((project, index) => (
           <article
-            className={`about-project ${activeProject === index ? 'is-active' : ''}`}
+            className={`about-project ${activeProject === index ? 'is-active' : ''} ${project.featured ? 'is-featured' : ''}`}
             id={getProjectId(project.title)}
             key={project.title}
           >
             <div>
+              {project.featured && <p className="about-project-featured">★ Featured project</p>}
               <p className="about-project-date">{project.date} · {project.eyebrow}</p>
               <h3>{project.title}</h3>
               <p className="about-project-description">{project.description}</p>
